@@ -1,0 +1,8 @@
+bs4
+psutil
+asyncio
+telethon
+requests
+playwright
+flask[async]
+
