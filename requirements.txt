@@ -1,8 +1,2 @@
-bs4
-psutil
-asyncio
-telethon
-requests
-playwright
-flask[async]
+flask==3.0.3
 
