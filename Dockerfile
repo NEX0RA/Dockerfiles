@@ -9,27 +9,28 @@ ENV DEBIAN_FRONTEND=noninteractive \
 # Set the working directory
 WORKDIR /app
 
-# Install xpra + deps
+# Copy apt package list
+COPY apt.txt .
+
+# Install only required apt packages
 RUN apt-get update && \
-    apt-get install -y xpra xvfb x11-utils x11-xserver-utils ffmpeg \
-                       libgl1-mesa-dri libgl1-mesa-glx libegl1-mesa && \
+    xargs -a apt.txt apt-get install -y --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
 
-# Set the virtual display environment variable for Xvfb
-ENV DISPLAY=:99
+# Copy requirements first for caching
+COPY requirements.txt .
 
-# Copy all application files
+# Upgrade pip + install deps
+RUN pip install --upgrade pip setuptools wheel && \
+    pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of your source code
 COPY . .
-
-# Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
 
 # Expose Flask + Xpra ports
 EXPOSE 8080
 EXPOSE 10000
 
 # Start the app
-CMD ["python", "app/main.py"]
-
-
+CMD ["python3", "app/main.py"]
 
