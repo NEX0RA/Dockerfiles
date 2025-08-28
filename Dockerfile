@@ -10,7 +10,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
 WORKDIR /app
 
 # Copy apt package list
-COPY apt.txt .
+COPY apt-packages.txt .
 
 # Install only required apt packages
 RUN apt-get update && \
