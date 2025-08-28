@@ -3,10 +3,5 @@ xvfb
 x11-utils
 x11-xserver-utils
 ffmpeg
-libgl1-mesa-dri
-libgl1-mesa-glx
-libegl1-mesa
-build-essential
-python3-dev
-git
-
+libgl1
+libegl1
