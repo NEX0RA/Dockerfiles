@@ -14,7 +14,7 @@ COPY apt.txt .
 
 # Install only required apt packages
 RUN apt-get update && \
-    xargs -a apt.txt apt-get install -y --no-install-recommends && \
+    xargs -a apt-packages.txt apt-get install -y --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
 
 # Copy requirements first for caching
