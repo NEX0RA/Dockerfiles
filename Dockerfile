@@ -26,11 +26,3 @@ RUN pip install --upgrade pip setuptools wheel && \
 
 # Copy the rest of your source code
 COPY . .
-
-# Expose Flask + Xpra ports
-EXPOSE 8080
-EXPOSE 10000
-
-# Start the app
-CMD ["python3", "app/main.py"]
-
